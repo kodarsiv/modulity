@@ -14,6 +14,15 @@ class ModulityServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if ($this->app->runningInConsole()){
+            // publish config
+            $this->publishes([
+                __DIR__."/../config/modulity.php" => config_path("modulity.php")
+            ], "modulity-config");
+
+            // commands entegration
+            $this->commands([]);
+        }
     }
 
         /**
