@@ -1,0 +1,53 @@
+Folders:
+  - level: base
+    type: folder
+    name: Services
+    classes:
+      - Service
+      - ServiceInterface
+  - level: base
+    type: folder
+    name: Repositories
+    classes:
+      - Repository
+      - RepositoryInterface
+  - level: base
+    type: folder
+    name: Config
+    files:
+      - config
+  - level: base
+    type: folder
+    name: Controllers
+    classes:
+      - Controller
+  - level: base
+    type: folder
+    name: Support
+    children:
+      - level: Support
+        type: folder
+        name: Exceptions
+      - level: Support
+        type: folder
+        name: Facades
+      - level: Support
+        type: folder
+        name: Helper
+      - level: Support
+        type: folder
+        name: Translations
+        children:
+          - level: Support/Translations
+            type: folder
+            name: TR
+            files:
+              - lang
+          - level: Support/Translations
+            type: folder
+            name: EN
+            files:
+              - lang
+  - level: base
+    type: folder
+    name: Tests
