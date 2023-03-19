@@ -3,5 +3,9 @@
 return [
     "namespace" => env("MODULITY_NAMESPACE", "Kodarsiv"),
     "module_path" => app_path("Modules"),
-    "template" => "default"
+    "template" => 'default',
+
+
+    /************************/
+    "src" => __DIR__."/../",
 ];
