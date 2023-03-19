@@ -3,8 +3,9 @@
 namespace Kodarsiv\Modulity\Commands;
 
 use Illuminate\Console\Command;
+use Kodarsiv\Modulity\Generators\StructureGenerator;
 
-class StructureGenerator extends Command
+class StructureGeneratorCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -25,14 +26,18 @@ class StructureGenerator extends Command
      */
     public function handle(): void
     {
-        $bar = $this->output->createProgressBar(6);
+        # get arguments
+        $moduleName = $this->argument('module');
+
+        $bar = $this->output->createProgressBar(2);
         $bar->setFormat('Progress: %current%/%max% -> <info>%message%</info>');
         $bar->setMessage('Start Generating!');
         $bar->start();
 
-        // TODO :: The commands for creating classes will come here
+        $generator = new StructureGenerator($moduleName);
+        $generator->make();
 
-        $bar->setMessage("");
+        $bar->setMessage("Module: {".$moduleName."} has been generated!");
         $bar->finish();
         $bar->clear();
     }
