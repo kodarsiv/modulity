@@ -3,6 +3,7 @@
 namespace Kodarsiv\Modulity\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Kodarsiv\Modulity\Commands\ServiceGeneratorCommand;
 use Kodarsiv\Modulity\Commands\StructureGeneratorCommand;
 use Kodarsiv\Modulity\Modulity;
 
@@ -21,9 +22,10 @@ class ModulityServiceProvider extends ServiceProvider
                 __DIR__."/../config/modulity.php" => config_path("modulity.php")
             ], "modulity-config");
 
-            // commands entegration
+            // commands integration
             $this->commands([
-                StructureGeneratorCommand::class
+                StructureGeneratorCommand::class,
+                ServiceGeneratorCommand::class
             ]);
         }
     }

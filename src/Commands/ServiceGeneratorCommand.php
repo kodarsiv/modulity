@@ -2,6 +2,7 @@
 
 namespace Kodarsiv\Modulity\Commands;
 
+use Exception;
 use Illuminate\Console\Command;
 use Kodarsiv\Modulity\Generators\ServiceGenerator;
 use Kodarsiv\Modulity\Generators\StructureGenerator;
@@ -31,20 +32,27 @@ class ServiceGeneratorCommand extends Command
         $moduleName = $this->argument('module');
         $serviceName = $this->argument('service');
 
-        $bar = $this->output->createProgressBar(2);
+        $bar = $this->output->createProgressBar(1);
         $bar->setFormat('Progress: %current%/%max% -> <info>%message%</info>');
         $bar->setMessage('Start Generating!');
         $bar->start();
 
-        $generator = new ServiceGenerator(
-            moduleName: $moduleName,
-            filename: $serviceName
-        );
+        try {
+            $generator = new ServiceGenerator(
+                moduleName: $moduleName,
+                filename: $serviceName
+            );
+            $generator->make();
+        }catch (Exception $e){
+            $bar->finish();
+            $bar->clear();
+            $this->error($e->getMessage());
+            return;
+        }
 
-        $generator->make();
-
-        $bar->setMessage("Module: {".$moduleName."} has been generated!");
         $bar->finish();
         $bar->clear();
+
+        $this->info("Service has been generated !");
     }
 }
