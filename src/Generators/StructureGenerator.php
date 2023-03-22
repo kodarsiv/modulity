@@ -24,6 +24,10 @@ class StructureGenerator implements GeneratorInterface {
     {
         $this->moduleName = $moduleName;
 
+        if ( !File::isDirectory(config('modulity.module_path')) ){
+            File::makeDirectory(config("modulity.module_path"), 0775);
+        }
+
         $this->parser = new Parser();
         $this->setTemplateYml(config('modulity.template'));
         $this->setStructure($this->parser->parseYML($this->templateYml));

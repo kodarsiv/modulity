@@ -40,12 +40,12 @@ Folders:
         children:
           - level: Support/Translations
             type: folder
-            name: TR
+            name: tr
             files:
               - lang
           - level: Support/Translations
             type: folder
-            name: EN
+            name: en
             files:
               - lang
   - level: base
