@@ -72,6 +72,7 @@ class RepositoryGenerator implements GeneratorInterface {
             throw $exception;
         }
 
+        $this->setCompleted(true);
         return $this;
     }
 
