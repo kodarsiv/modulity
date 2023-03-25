@@ -2,6 +2,7 @@
 
 namespace Kodarsiv\Modulity\Generators;
 
+use Exception;
 use Illuminate\Support\Facades\File;
 use Kodarsiv\Modulity\Contracts\GeneratorInterface;
 use Kodarsiv\Modulity\Parser;
@@ -35,6 +36,9 @@ class StructureGenerator implements GeneratorInterface {
     }
 
 
+    /**
+     * @throws Exception
+     */
     public function make(): self
     {
         $folders = $this->structure['Folders'];
@@ -61,14 +65,6 @@ class StructureGenerator implements GeneratorInterface {
     }
 
     /**
-     * @return array
-     */
-    public function getStructure(): array
-    {
-        return $this->structure;
-    }
-
-    /**
      * @param array $structure
      * @return StructureGenerator
      */
@@ -82,14 +78,16 @@ class StructureGenerator implements GeneratorInterface {
     {
         foreach ($items as $item) {
             if ( $item['type'] == self::TYPE_IS_FOLDER ){
-                $this->create(function () use ($item) {
+                $this->create(/**
+                 * @throws Exception
+                 */ function () use ($item) {
                     try {
                         $this->createFolders($item);
                         if ( isset($item['files']) ){
                             $this->createFiles($this->createFolderPath($item),$item['files']);
                         }
-                    }catch (\Exception $exception){
-                        throw new \Exception($exception->getMessage());
+                    }catch (Exception $exception){
+                        throw new Exception($exception->getMessage());
                     }
                 });
             }
@@ -120,7 +118,7 @@ class StructureGenerator implements GeneratorInterface {
                 try {
                     touch($filePath);
                     File::put($filePath, "<?php \n\nreturn [\n];");
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                    // log error
                     throw $e;
                 }

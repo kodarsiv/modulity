@@ -3,6 +3,8 @@
 namespace Kodarsiv\Modulity\Commands;
 
 use Illuminate\Console\Command;
+use Kodarsiv\Modulity\Generators\RepositoryGenerator;
+use Kodarsiv\Modulity\Generators\ServiceGenerator;
 use Kodarsiv\Modulity\Generators\StructureGenerator;
 
 class StructureGeneratorCommand extends Command
@@ -23,22 +25,58 @@ class StructureGeneratorCommand extends Command
 
     /**
      * Execute the console command.
+     * @throws \Exception
      */
     public function handle(): void
     {
         # get arguments
         $moduleName = $this->argument('module');
 
-        $bar = $this->output->createProgressBar(2);
+        $bar = $this->output->createProgressBar(3);
         $bar->setFormat('Progress: %current%/%max% -> <info>%message%</info>');
         $bar->setMessage('Start Generating!');
         $bar->start();
 
-        $generator = new StructureGenerator($moduleName);
-        $generator->make();
+        try {
+            $structure = new StructureGenerator($moduleName);
+            $structure->make();
+        }catch (\Exception $exception){
+            $bar->finish();
+            $bar->clear();
 
-        $bar->setMessage("Module: {".$moduleName."} has been generated!");
+            $this->error($exception->getMessage());
+        }
+        $bar->setMessage('Created Directories!');
+        sleep(1);
+
+        try {
+            $service = new ServiceGenerator($moduleName, $moduleName);
+            $service->make();
+        }catch (\Exception $exception){
+            $bar->finish();
+            $bar->clear();
+
+            $this->error($exception->getMessage());
+        }
+        $bar->advance();
+        $bar->setMessage('Service Created!');
+        sleep(1);
+
+        try {
+            $service = new RepositoryGenerator($moduleName, $moduleName);
+            $service->make();
+        }catch (\Exception $exception){
+            $bar->finish();
+            $bar->clear();
+
+            $this->error($exception->getMessage());
+        }
+        $bar->advance();
+        $bar->setMessage('Repository Created!');
+        sleep(1);
+
         $bar->finish();
         $bar->clear();
+        $this->info("Module: {".$moduleName."} has been generated!");
     }
 }

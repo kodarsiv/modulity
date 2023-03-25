@@ -12,6 +12,7 @@ class FileGenerator implements GeneratorInterface
 
     public const TYPE_REPOSITORY = 'repository';
     public const TYPE_SERVICE = 'service';
+    public const TYPE_CONTROLLERS = 'controller';
 
     private bool $completed;
     private string $type;
