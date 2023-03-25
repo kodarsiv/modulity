@@ -3,6 +3,7 @@
 namespace Kodarsiv\Modulity\Commands;
 
 use Illuminate\Console\Command;
+use Kodarsiv\Modulity\Generators\ControllerGenerator;
 use Kodarsiv\Modulity\Generators\RepositoryGenerator;
 use Kodarsiv\Modulity\Generators\ServiceGenerator;
 use Kodarsiv\Modulity\Generators\StructureGenerator;
@@ -32,7 +33,7 @@ class StructureGeneratorCommand extends Command
         # get arguments
         $moduleName = $this->argument('module');
 
-        $bar = $this->output->createProgressBar(3);
+        $bar = $this->output->createProgressBar(4);
         $bar->setFormat('Progress: %current%/%max% -> <info>%message%</info>');
         $bar->setMessage('Start Generating!');
         $bar->start();
@@ -74,6 +75,20 @@ class StructureGeneratorCommand extends Command
         $bar->advance();
         $bar->setMessage('Repository Created!');
         sleep(1);
+
+        try {
+            $service = new ControllerGenerator($moduleName, $moduleName);
+            $service->make();
+        }catch (\Exception $exception){
+            $bar->finish();
+            $bar->clear();
+
+            $this->error($exception->getMessage());
+        }
+        $bar->advance();
+        $bar->setMessage('Controller Created!');
+        sleep(1);
+
 
         $bar->finish();
         $bar->clear();
