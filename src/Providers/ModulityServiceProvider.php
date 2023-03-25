@@ -3,6 +3,7 @@
 namespace Kodarsiv\Modulity\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Kodarsiv\Modulity\Commands\RepositoryGeneratorCommand;
 use Kodarsiv\Modulity\Commands\ServiceGeneratorCommand;
 use Kodarsiv\Modulity\Commands\StructureGeneratorCommand;
 use Kodarsiv\Modulity\Modulity;
@@ -25,7 +26,8 @@ class ModulityServiceProvider extends ServiceProvider
             // commands integration
             $this->commands([
                 StructureGeneratorCommand::class,
-                ServiceGeneratorCommand::class
+                ServiceGeneratorCommand::class,
+                RepositoryGeneratorCommand::class
             ]);
         }
     }
