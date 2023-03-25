@@ -24,6 +24,8 @@ class FileGenerator implements GeneratorInterface
         $this->type = "";
         $this->filename = "";
         $this->path = "";
+
+        $this->setCompleted(false);
     }
 
     /**
