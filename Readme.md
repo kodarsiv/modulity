@@ -13,7 +13,7 @@ To start using the Modulity package, you must first install the package via Comp
 Use the following command in the terminal to install the package:
 
 ```shell
-composer require kodarsiv/modulity
+composer require tanerincode/modulity
 ```
 After this process, you need to publish the configuration file :
 ```shell
