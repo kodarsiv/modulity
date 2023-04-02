@@ -39,7 +39,7 @@ class ModulityModuleCreateTest extends TestCase
      *
      * @throws Exception
      */
-    public function structure_crate_module(): void
+    public function structure_crate_module_test(): void
     {
         try {
             $this->generateModule();
@@ -73,7 +73,7 @@ class ModulityModuleCreateTest extends TestCase
      *
      * @throws Exception
      */
-    public function structure_module_already_exist(): void
+    public function structure_module_already_exist_test(): void
     {
         $this->generateModule();
         try {

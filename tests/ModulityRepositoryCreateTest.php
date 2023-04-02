@@ -4,11 +4,11 @@ namespace Kodarsiv\Modulity\Tests;
 use Exception;
 use Illuminate\Support\Facades\File;
 use Kodarsiv\Modulity\Exceptions\FileAlreadyExistException;
-use Kodarsiv\Modulity\Generators\ServiceGenerator;
+use Kodarsiv\Modulity\Generators\RepositoryGenerator;
 use Kodarsiv\Modulity\Generators\StructureGenerator;
 use Tests\TestCase;
 
-class ModulityServiceCreateTest extends TestCase
+class ModulityRepositoryCreateTest extends TestCase
 {
     private string $moduleName;
     private string $fileName;
@@ -49,12 +49,12 @@ class ModulityServiceCreateTest extends TestCase
      *
      * @throws Exception
      */
-    public function crate_service_test(): void
+    public function crate_repository_test(): void
     {
         $this->generate();
         $filePath = config('modulity.module_path') . '/' .
-            ucfirst($this->moduleName) . '/Services/' . ucfirst($this->fileName)."Service.php";
-        $this->assertTrue(file_exists($filePath), 'Service file should exist.');
+            ucfirst($this->moduleName) . '/Repositories/' . ucfirst($this->fileName)."Repository.php";
+        $this->assertTrue(file_exists($filePath), 'Repository file should exist.');
     }
 
 
@@ -63,7 +63,7 @@ class ModulityServiceCreateTest extends TestCase
      *
      * @throws Exception
      */
-    public function service_already_exist_test(): void
+    public function repository_already_exist_test(): void
     {
         $this->generate();
         try {
@@ -81,7 +81,7 @@ class ModulityServiceCreateTest extends TestCase
      */
     private function generate(){
         try {
-            $generator = new ServiceGenerator($this->moduleName, $this->fileName);
+            $generator = new RepositoryGenerator($this->moduleName, $this->fileName);
             $generator->make();
 
         }catch (Exception $exception){
