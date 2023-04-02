@@ -2,9 +2,11 @@
 
 namespace Kodarsiv\Modulity\Generators;
 
+use Kodarsiv\Modulity\Exceptions\FileAlreadyExistException;
 use Exception;
 use Illuminate\Support\Facades\File;
 use Kodarsiv\Modulity\Contracts\GeneratorInterface;
+use Kodarsiv\Modulity\Exceptions\ModuleAlreadyExistException;
 use Kodarsiv\Modulity\Parser;
 
 class StructureGenerator implements GeneratorInterface {
@@ -41,6 +43,12 @@ class StructureGenerator implements GeneratorInterface {
      */
     public function make(): self
     {
+
+        if ( File::isDirectory(config('modulity.module_path').DIRECTORY_SEPARATOR.$this->moduleName) ) {
+            throw new ModuleAlreadyExistException($this->moduleName);
+        }
+
+
         $folders = $this->structure['Folders'];
         $this->eachYmlFile($folders);
         return $this;

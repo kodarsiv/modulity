@@ -25,6 +25,11 @@
             "Modules\\" : "app/Modules/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Kodarsiv\\Modulity\\Tests\\": "tests/"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
