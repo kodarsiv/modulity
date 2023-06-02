@@ -23,6 +23,11 @@ Folders:
       - Controller
   - level: base
     type: folder
+    name: Providers
+    classes:
+      - Provider
+  - level: base
+    type: folder
     name: Support
     children:
       - level: Support

@@ -5,9 +5,7 @@ namespace Kodarsiv\Modulity\Commands;
 use Exception;
 use Illuminate\Console\Command;
 use Kodarsiv\Modulity\Generators\ControllerGenerator;
-use Kodarsiv\Modulity\Generators\RepositoryGenerator;
-use Kodarsiv\Modulity\Generators\ServiceGenerator;
-use Kodarsiv\Modulity\Generators\StructureGenerator;
+
 
 class ControllerGeneratorCommand extends Command
 {
@@ -22,7 +20,7 @@ class ControllerGeneratorCommand extends Command
      *
      * @var string
      */
-    protected $description = 'A command for create new repository file';
+    protected $description = 'A command for create new controller file';
 
     /**
      * Execute the console command.

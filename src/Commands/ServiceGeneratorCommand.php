@@ -5,7 +5,7 @@ namespace Kodarsiv\Modulity\Commands;
 use Exception;
 use Illuminate\Console\Command;
 use Kodarsiv\Modulity\Generators\ServiceGenerator;
-use Kodarsiv\Modulity\Generators\StructureGenerator;
+
 
 class ServiceGeneratorCommand extends Command
 {

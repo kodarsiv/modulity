@@ -18,7 +18,9 @@
     "require": {
         "php": ">=8.0",
         "ext-mbstring": "*",
-        "symfony/yaml": "^6.2"
+        "symfony/yaml": "^6.2",
+        "illuminate/console": "^10.13",
+        "illuminate/support": "^10.13"
     },
     "autoload": {
         "psr-4": {

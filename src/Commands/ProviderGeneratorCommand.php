@@ -4,22 +4,22 @@ namespace Kodarsiv\Modulity\Commands;
 
 use Exception;
 use Illuminate\Console\Command;
-use Kodarsiv\Modulity\Generators\RepositoryGenerator;
+use Kodarsiv\Modulity\Generators\ProviderGenerator;
 
-class RepositoryGeneratorCommand extends Command
+class ProviderGeneratorCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'modulity:repository {module} {repository}';
+    protected $signature = 'modulity:provider {module} {provider}';
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'A command for create new repository file';
+    protected $description = 'A command for create new provider file';
 
     /**
      * Execute the console command.
@@ -28,7 +28,7 @@ class RepositoryGeneratorCommand extends Command
     {
         # get arguments
         $moduleName = $this->argument('module');
-        $repositoryName = $this->argument('repository');
+        $fileName = $this->argument('provider');
 
         $bar = $this->output->createProgressBar(1);
         $bar->setFormat('Progress: %current%/%max% -> <info>%message%</info>');
@@ -36,9 +36,9 @@ class RepositoryGeneratorCommand extends Command
         $bar->start();
 
         try {
-            $generator = new RepositoryGenerator(
+            $generator = new ProviderGenerator(
                 moduleName: $moduleName,
-                filename: $repositoryName
+                filename: $fileName
             );
             $generator->make();
         }catch (Exception $e){
@@ -51,6 +51,6 @@ class RepositoryGeneratorCommand extends Command
         $bar->finish();
         $bar->clear();
 
-        $this->info("Repository has been generated !");
+        $this->info("Provider has been generated !");
     }
 }
